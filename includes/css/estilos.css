@@ -1,0 +1,70 @@
+body{
+	padding: 0;
+}
+/* Top Menu */
+.top{
+	background-color: #eeeeee;
+}
+#navTop{
+	padding-left: 10%;
+	padding-top: 10px;
+	padding-right: 10%;
+}
+#imgLogo{
+	width: 150px;
+}
+#tituloTop{
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: bold;	
+}
+#menu{
+	float: right;
+}
+/* Info */
+.info{
+	padding-left: 10%;
+	padding-right: 10%;
+}
+#imgHD{
+	width: 200px;
+}
+#imgRotativo{
+	margin-top: 50px;
+}
+/* Container */
+.container{
+	padding: 10px;
+}
+.meio{
+	margin-top: 50px;
+}
+#imgMotog{
+	width: 300px;
+}
+#imgSite{
+	padding-bottom: 10px;
+	border-radius: 30px;
+}
+#btnExcluirApk{
+	float: right;
+	font-size: 20px;
+}
+/* Responsivo */
+@media (min-width: 200px)  and (max-width: 669px){
+	#menu{
+		float: none;
+		padding-bottom: 5px;
+	}
+	#tituloTop{
+		text-align: center;
+	}
+}
+@media (min-width: 670px){
+	#menu{
+		float: right;
+	}
+	#titulo{
+		float: left;
+	}
+}
