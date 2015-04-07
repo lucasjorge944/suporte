@@ -10,12 +10,16 @@
 		<meta name="author" content="ckt.lucas">
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-		<link rel="shortcut icon" href="/favicon.ico">
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png">		
+		<link rel="icon" type="image/png" href="<?php echo base_url('icon.png'); ?>">
+		<link rel="shortcut icon" type="image/png" href="<?php echo base_url('icon.png'); ?>">
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="<?php echo base_url('includes/bootstrap/css/bootstrap.min.css'); ?>">
 		<!-- Estilos -->
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('includes/css/estilos.css') ?>">
+		<!-- jQuery -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="<?php echo base_url('includes/bootstrap/js/bootstrap.min.js'); ?>"></script>
 	</head>
 	<body>
 	<div class="top">
@@ -31,10 +35,11 @@
 				    Logado Como: <span id="usuario_logado"><?php echo $sessao['username']; ?></span> <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu" role="menu">
-				    <li><a href="" id="btnPerfil" data-toggle='modal' data-target='#myModalPerfil'>Perfil</a></li>
-				    <li><a href="home">Home</a></li>
+				  	<li><a href="home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+				    <li><a href="" id="btnPerfil" data-toggle='modal' data-target='#myModalPerfil'><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Perfil</a></li>
+				    <li><a href="#"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Tutoriais</a></li>
 				    <li class="divider"></li>
-				    <li><a href="#" id="btnSair">Sair</a></li>
+				    <li><a href="#" id="btnSair"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Sair</a></li>
 				  </ul>
 				</div>
 			  	
@@ -80,7 +85,7 @@
 				<div class='panel-heading' role='tab' id='heading".$i."'>
 					<h4 class='panel-title'>
 						<a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse".$i."' aria-expanded='false' aria-controls='collapse".$i."'>
-							".$ambientes[$i]->nome."
+							<span class='glyphicon glyphicon-menu-down' aria-hidden='true'></span> ".$ambientes[$i]->nome."
 						</a>
 					</h4>
 				</div>
@@ -130,7 +135,7 @@
 							if ($acesso == "A" || $acesso == "G"){
 						  	echo"	  	
 						  	<div class='item'>
-						  		<button id='btnEditAmb' onclick='editAmbiente(this.value)' type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#modalEditAmb' value='".$ambientes[$i]->id_ambiente."'>Editar</button>
+						  		<button id='btnEditAmb' onclick='editAmbiente(this.value)' type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#modalEditAmb' value='".$ambientes[$i]->id_ambiente."'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Editar</button>
 						  	</div>";
 							}
 						  echo"
@@ -173,7 +178,7 @@
 						   <label>Upload Apk</label>
 						    <input type='text' name='caminho' style='display: none;' value='".$ambientes[$i]->path_apks."' />
 							<input type='file' id='file' name='files[]' multiple='multiple' />
-							<input name='btnUpload' type='submit' value='Enviar' class='btn btn-success'/> 
+							<button name='btnUpload' type='submit'  class='btn btn-success'><span class='glyphicon glyphicon-cloud-upload' aria-hidden='true'></span> Enviar</button> 
 						</form>";
 				}
 				echo "
@@ -192,11 +197,6 @@
 	</div>
 </body>
 </html>
-
-	<!-- jQuery -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url('includes/js/jquery-2.1.3.js'); ?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('includes/ajax/post.js')?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('includes/js/js.js'); ?>"></script>
-	<!-- Bootstrap -->
-	<script src="<?php echo base_url('includes/bootstrap/js/bootstrap.min.js'); ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('includes/ajax/post.js')?>"></script>

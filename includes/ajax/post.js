@@ -214,7 +214,7 @@ function editAmbiente(clicked_value){
 
 function excluirApk(value_select){
 	var caminho_arquivo = value_select;
-	$("#myModalExcluirApk").modal("show");
+	$('#myModalExcluirApk').modal('show');
 
 	$(document).ready(function() {
 		$("#btnConfirmarApk").click(function() {

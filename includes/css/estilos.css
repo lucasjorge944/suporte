@@ -50,6 +50,9 @@ body{
 	float: right;
 	font-size: 20px;
 }
+.containText{
+	height: 100px;
+}
 /* Responsivo */
 @media (min-width: 200px)  and (max-width: 669px){
 	#menu{
