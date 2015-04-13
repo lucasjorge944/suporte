@@ -1,10 +1,12 @@
 body{
 	padding: 0;
+	font-family: "open_sansregular";
 }
 /* Top Menu */
 .top{
 	background-color: #eeeeee;
 }
+
 #navTop{
 	padding-left: 10%;
 	padding-top: 10px;
@@ -16,7 +18,7 @@ body{
 #tituloTop{
 	color: #ffffff;
 	font-size: 20px;
-	font-weight: bold;	
+	font-family: "open_sansbold";	
 }
 #menu{
 	float: right;
@@ -38,6 +40,9 @@ body{
 }
 .meio{
 	margin-top: 50px;
+}
+.meio h1{
+	font-family: "open_sansbold";
 }
 #imgMotog{
 	width: 300px;

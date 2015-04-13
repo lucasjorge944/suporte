@@ -16,6 +16,8 @@
 		<link rel="stylesheet" href="<?php echo base_url('includes/bootstrap/css/bootstrap.min.css'); ?>">
 		<!-- Estilos -->
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('includes/css/estilos.css'); ?>">
+		<!-- Font -->
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('includes/webfontkit/stylesheet.css'); ?>">
 	</head>
 	<body>
 	<div class="top">
@@ -50,7 +52,8 @@
 				  				<input type='password' class='form-control' id='txtSenhaLogin' placeholder='Senha'>
 				  			</div>
 				  			<div class='form-group'>
-				  			<button class='btn btn-success btn-block' id='btnEntrar'><span class='glyphicon glyphicon-log-in' aria-hidden='true'></span> Log In</button>
+				  			<button type='button' class='btn btn-success btn-block' id='btnEntrar'><span class='glyphicon glyphicon-log-in' aria-hidden='true'></span> Log In
+				  			</button>
 				  			</div>
 				  		</form>
 			  		";
@@ -75,32 +78,37 @@
 	</div>
 	<div class="container meio">
 		<center><h1><strong>Nosso Conteúdo</strong></h1></center>
-		<div class="row" style="margin-top:30px;">
+		<div class="row" id="itensConteudo" style="margin-top:30px;">
 		  <div class="col-md-4">
-		  	<h2><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Downloads/Infos</h2>
-		  	<div class="containText">
-		  		<p style="text-align:justify">Encontre as versões de nossas aplicações, manuais e outras informações referentes ao ambiente desejado. Acesse com seu Usuário e Senha no canto superior direito da página e veja nossas disponibilizações.</p>
-		  	</div>
-		  	<img src="<?php echo base_url('includes/imgs/imgMotog.png'); ?>" class="img-responsive" alt="Responsive image">
-		  </div>
-		  <div class="col-md-4">
-		  	<h2><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Site</h2>
-		  	<div class="containText">
-		  		<p style="text-align:justify">Acesse nosso site oficial e obtenha mais informações detalhadas sobre a ti.mob e o Rotativo Digital.</p>
-		  	</div>
-		  	<a href="http://dev.timob.com.br/timob/" target="_blank"><img src="<?php echo base_url('includes/imgs/site.png'); ?>" class="img-responsive" alt="Responsive image" id="imgSite">
-		  	<button type="button" class="btn btn-default btn-block">Clique e acesse!</button></a>
-		  </div>
-		  <div class="col-md-4">
-			  	<h2><span class="glyphicon glyphicon-film" aria-hidden="true"></span> Vídeo Aulas</h2>
+		  	<a style="text-decoration:none;color:#333333;" href="#" target="_blank">
+			  	<h2><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Downloads/Infos</h2>
 			  	<div class="containText">
-			  		<p style="text-align:justify">Ache a todo momento a solução para suas dúvidas, a partir de tutoriais em vídeos que auxiliam em todos processos que nossos usúarios e clientes necessitam.</p>
+			  		<p style="text-align:justify">Encontre as versões de nossas aplicações, manuais e outras informações referentes ao ambiente desejado. Acesse com seu Usuário e Senha no canto superior direito da página e veja nossas disponibilizações.</p>
 			  	</div>
-			  	<center><img src="<?php echo base_url('includes/imgs/video.png'); ?>" class="img-responsive" alt="Responsive image"></center>
+			  	<img src="<?php echo base_url('includes/imgs/imgMotog.png'); ?>" class="img-responsive" alt="Responsive image">
+		  	</a>
+		  </div>
+		  <div class="col-md-4">
+		  	<a style="text-decoration:none;color:#333333;" href="#" target="_blank">
+			  	<h2><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Help Desk</h2>
+			  	<div class="containText">
+			  		<p style="text-align:justify">Problemas no sistema? Abra agora uma solicitação de suporte à nossa equipe e resolveremos no menor tempo possível!</p>
+			  	</div>
+			  	<center><img src="<?php echo base_url('includes/imgs/helpdesk.png'); ?>" class="img-responsive" alt="Responsive image" id="imgSite"></center>
+		  	</a>
+		  </div>
+		  	<div class="col-md-4">
+			  	<a style="text-decoration:none;color:#333333;" href="#" target="_blank">
+				  	<h2><span class="glyphicon glyphicon-film" aria-hidden="true"></span> Vídeo Aulas</h2>
+				  	<div class="containText">
+				  		<p style="text-align:justify">Ache a todo momento a solução para suas dúvidas, a partir de tutoriais em vídeos que auxiliam em todos processos que nossos usúarios e clientes necessitam.</p>
+				  	</div>
+				  	<center><img src="<?php echo base_url('includes/imgs/video.png'); ?>" class="img-responsive" alt="Responsive image"></center>
+				</a>
 			</div>
 		</div>
 		<hr>
-		<div class="row">
+		<div class="row" id="contato">
 			<div class="col-md-12">
 				<h2><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contato</h2>
 				<p style="text-align:justify">Quer deixar um comentário, sugestão ou crítica? 

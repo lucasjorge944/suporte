@@ -16,8 +16,11 @@
 		<link rel="stylesheet" href="<?php echo base_url('includes/bootstrap/css/bootstrap.min.css'); ?>">
 		<!-- Estilos -->
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('includes/css/estilos.css') ?>">
+		<!-- Font -->
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('includes/webfontkit/stylesheet.css'); ?>">
 		<!-- jQuery -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="<?php echo base_url('includes/js/jquery-2.1.3.js'); ?>"></script>
 		<!-- Bootstrap -->
 		<script src="<?php echo base_url('includes/bootstrap/js/bootstrap.min.js'); ?>"></script>
 	</head>
@@ -197,6 +200,5 @@
 	</div>
 </body>
 </html>
-	<script type="text/javascript" src="<?php echo base_url('includes/js/jquery-2.1.3.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('includes/js/js.js'); ?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('includes/ajax/post.js')?>"></script>
