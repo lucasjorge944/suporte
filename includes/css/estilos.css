@@ -58,6 +58,12 @@ body{
 .containText{
 	height: 100px;
 }
+#bold{
+	font-family: "open_sansbold";
+}
+.btnEditAcesso{
+	float: right;
+}
 /* Responsivo */
 @media (min-width: 200px)  and (max-width: 669px){
 	#menu{

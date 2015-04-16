@@ -16,6 +16,10 @@
 				'ambientes' => null,
 				'num_ambientes' => null,
 				'acesso' => null,
+				'acessos_ambientes' => null,
+				'num_acessos' => null,
+				'apks' => null,
+				'num_apks' => null,
 			);
 			
 			$sessao_on = $dados['sessao'];
@@ -29,13 +33,18 @@
 			
 			
 			$resultado = $this->ambiente_model->getAmbientes();
+			$result_acessos = $this->ambiente_model->getAcessos();
+			$result_apks = $this->ambiente_model->getApks();
 			$resultado_usu = $this->usuario_model->getUsuario($dados['sessao']['username']);
-			$dados['acesso'] = $resultado_usu->acesso;
-
-			$rows = count($resultado);
+			$rows = count($resultado);			
 			
 			$dados['ambientes'] = $resultado;
 			$dados['num_ambientes'] = $rows;
+			$dados['acesso'] = $resultado_usu->acesso;
+			$dados['acessos_ambientes'] = $result_acessos;
+			$dados['num_acessos'] = count($result_acessos);
+			$dados['apks'] = $result_apks;
+			$dados['num_apks'] = count($result_apks);
 			
 			$valid_formats = array("apk");
 			$max_file_size = 1024 * 1024 * 10; // 10Mb			
@@ -43,7 +52,9 @@
 			
 			if(isset($_POST['btnUpload']) and $_SERVER['REQUEST_METHOD'] == "POST"){
 				$path = $_POST['caminho']; // Upload directory
-				// Loop $_FILES to exeicute all files
+				$id_ambiente = $_POST['id_ambiente'];
+
+				//Loop $_FILES to exeicute all files
 				foreach ($_FILES['files']['name'] as $f => $name) {     
 				    if ($_FILES['files']['error'][$f] == 4) {
 				        continue; // Skip file if any error found
@@ -60,17 +71,26 @@
 				        else{ // No error found! Move uploaded files 
 				            if(move_uploaded_file($_FILES["files"]["tmp_name"][$f], $path.$name))
 				            $count++; // Number of successfully uploaded file
+
+				        	$dados_apk = array(
+				        		'id_apk' 					=> null,
+								'nome_apk' 					=> $_FILES['files']['name'][0],
+								'path_apk' 					=> $path.$_FILES['files']['name'][0],
+								'tbl_ambiente_id_ambiente' 	=> $id_ambiente,
+							);
+							
+							$this->ambiente_model->insertApk($dados_apk);
 				        }
 				    }
 				}
 			}
-
-			require_once('includes/modal/modal.php');
 			$this->load->view('restrita', $dados);
 		}
 
 		public function excluirApk(){
 		 	$caminho = $_POST['caminho_arquivo'];
+		 	$this->db->where('path_apk', $caminho);
+			$this->db->delete('tbl_apk'); 
 		 	unlink($caminho);
 		}
 		
@@ -78,55 +98,42 @@
 			if (isset($_POST['btnSalvarAmb'])){
 				
 				$nome_cidade = $_POST['nome_cidade'];
-				$url_master = $_POST['url_master'];
-				$url_cliente = $_POST['url_cliente'];
-				$url_distribuidor = $_POST['url_distribuidor'];
-				$login_master = $_POST['login_master'];
-				$senha_master = $_POST['senha_master'];
-				$login_gestor = $_POST['login_gestor'];
-				$senha_gestor = $_POST['senha_gestor'];
-				$login_distribuidor = $_POST['login_distribuidor'];
-				$senha_distribuidor = $_POST['senha_distribuidor'];
-				$senha_pdv = $_POST['senha_pdv'];
-				$login_coletor = $_POST['login_coletor'];
-				$senha_coletor = $_POST['senha_coletor'];
-				$login_fiscal = $_POST['login_fiscal'];
-				$senha_fiscal = $_POST['senha_fiscal'];
-				$login_monitor = $_POST['login_monitor'];
-				$senha_monitor = $_POST['senha_monitor'];
 				
 				$resultado = $this->ambiente_model->getMaxId()->result();
-				
-				
+
 				$id_max = ($resultado[0]->id_max) + 1;
 				$_nome_cidade = substr(strtolower($nome_cidade), 0, 3);
 				$path = 'repositorio/versoes/' . $id_max . '_' . $_nome_cidade . '/apks/';
 				mkdir($path, 0777, true);
 				
-				
-				
 				$dados = array(
-					'nome' 				=> $nome_cidade,
-					'url_master' 		=> $url_master,
-					'url_cliente' 		=> $url_cliente,
-					'url_distribuidor' 	=> $url_distribuidor,
-					'login_master' 		=> $login_master,
-					'senha_master' 		=> $senha_master,
-					'login_gestor' 		=> $login_gestor,
-					'senha_gestor' 		=> $senha_gestor,
-					'login_distribuidor' => $login_distribuidor,
-					'senha_distribuidor' => $senha_distribuidor,
-					'senha_pdv' 		=> $senha_pdv,
-					'login_coletor' 	=> $login_coletor,
-					'senha_coletor' 	=> $senha_coletor,
-					'login_fiscal' 		=> $login_fiscal,
-					'senha_fiscal' 		=> $senha_fiscal,
-					'login_monitor' 	=> $login_monitor,
-					'senha_monitor' 	=> $senha_monitor,
-					'path_apks'			=> $path,
+					'nome_ambiente' 				=> $nome_cidade,
+					'ativo' 				=> 'S',
+					'path_apk' 				=> $path,
 				);
 				
 				$this->ambiente_model->insertAmbiente($dados);
+			}
+		}
+
+		public function novoAcesso(){
+			if (isset($_POST['btnSalvarAcesso'])){
+				
+				$id_ambiente = $_POST['id_ambiente'];
+				$nome_acesso = $_POST['nome_acesso'];
+				$link = $_POST['link'];
+				$usuario = $_POST['usuario'];
+				$senha = $_POST['senha'];
+
+				$dados = array(
+					'nome_acesso' 				=> $nome_acesso,
+					'link' 						=> $link,
+					'usuario' 					=> $usuario,
+					'senha' 					=> $senha,
+					'tbl_ambiente_id_ambiente'	=> $id_ambiente,
+				);
+				
+				$this->ambiente_model->insertAcesso($dados);
 			}
 		}
 		

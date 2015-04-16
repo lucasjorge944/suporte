@@ -1,3 +1,6 @@
+<?php 
+  header("Content-Type: text/html; charset=UTF-8");
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -45,7 +48,6 @@
 				    <li><a href="#" id="btnSair"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Sair</a></li>
 				  </ul>
 				</div>
-			  	
 			  </div>
 			</div>
 		</nav>
@@ -88,103 +90,71 @@
 				<div class='panel-heading' role='tab' id='heading".$i."'>
 					<h4 class='panel-title'>
 						<a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse".$i."' aria-expanded='false' aria-controls='collapse".$i."'>
-							<span class='glyphicon glyphicon-menu-down' aria-hidden='true'></span> ".$ambientes[$i]->nome."
+							<span class='glyphicon glyphicon-menu-down' aria-hidden='true'></span> ".$ambientes[$i]->nome_ambiente."
 						</a>
 					</h4>
 				</div>
 				<div id='collapse".$i."' class='panel-collapse collapse' role='tabpanel' aria-labelledby='heading".$i."'>
 					<div class='panel-body'>
-						<p>Url Master: <a href='".$ambientes[$i]->url_master."'>".$ambientes[$i]->url_master."</a> </p>
-						<p>Url Cliente: <a href='".$ambientes[$i]->url_cliente."'>".$ambientes[$i]->url_cliente."</a> </p>
-						<p>Url Distribuidor: <a href='".$ambientes[$i]->url_distribuidor."'>".$ambientes[$i]->url_distribuidor."</a> </p>
-						<hr>
+						<div class='row'>
+							<div class='col-md-6'>";
+
+								for ($x=0; $x < $num_acessos; $x++) { 
+									if ($ambientes[$i]->id_ambiente == $acessos_ambientes[$x]->tbl_ambiente_id_ambiente){
+
+										echo "
+										<h3><span id='bold'>".$acessos_ambientes[$x]->nome_acesso."</span></h3>
+										<h4><span id='bold'>Link:</span> <a target='_blank' href='".$acessos_ambientes[$x]->link."'>".$acessos_ambientes[$x]->link."</a></h4>
+										<button class='btn btn-info btn-lg btnEditAcesso'> 
+											<span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Editar
+										</button>
+										<h4><span id='bold'>Usuário:</span> ".$acessos_ambientes[$x]->usuario."</h4>
+										<h4><span id='bold'>Senha:</span> ".$acessos_ambientes[$x]->senha."</h4>";
+
+									}
+								}
+						echo "
+							</div>
+						</div>						
 						<div class='row'>
 						  <div class='col-md-6'>
-						  	<div class='item'>
-						  		<p>Login Master: ".$ambientes[$i]->login_master."</p>
-						  		<p>Senha Master: ".$ambientes[$i]->senha_master."</p>
-						  	</div>
-						  	<hr>
-						  	<div class='item'>
-						  		<p>Login Gestor: ".$ambientes[$i]->login_gestor."</p>
-						  		<p>Senha Gestor: ".$ambientes[$i]->senha_gestor."</p>
-						  	</div>
-						  	<hr>
-						  	<div class='item'>
-						  		<p>Login Distribuidor: ".$ambientes[$i]->login_distribuidor."</p>
-						  		<p>Senha Distribuidor: ".$ambientes[$i]->senha_distribuidor."</p>
-						  	</div>
-						  	<hr>
-						  	<div class='item'>
-						  		<p>Senha PDV: ".$ambientes[$i]->senha_pdv."</p>
-						  	</div>
-						  </div>
-						  <div class='col-md-6'>
-						  	<div class='item'>
-						  		<p>Login Coletor: ".$ambientes[$i]->login_coletor."</p>
-						  		<p>Senha Coletor: ".$ambientes[$i]->senha_coletor."</p>
-						  	</div>
-						  	<hr>
-						  	<div class='item'>
-						  		<p>Login Fiscal: ".$ambientes[$i]->login_fiscal."</p>
-						  		<p>Senha Fiscal: ".$ambientes[$i]->senha_fiscal."</p>
-						  	</div>
-						  	<hr>
-						  	<div class='item'>
-						  		<p>Login Monitor: ".$ambientes[$i]->login_monitor."</p>
-						  		<p>Senha Monitor: ".$ambientes[$i]->senha_monitor."</p>
-						  	</div>
-						  	<hr>";
-							if ($acesso == "A" || $acesso == "G"){
-						  	echo"	  	
-						  	<div class='item'>
-						  		<button id='btnEditAmb' onclick='editAmbiente(this.value)' type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#modalEditAmb' value='".$ambientes[$i]->id_ambiente."'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Editar</button>
-						  	</div>";
-							}
-						  echo"
+						  	<button id='".$ambientes[$i]->id_ambiente."' type='button' class='btn btn-primary btn-lg btn-block' data-toggle='modal' data-target='#modalNovoAcesso' onclick='novoAcesso(this.id)'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Novo Acesso</button>
 						  </div>
 						</div>
 						<hr>
-						<div class='row'>
-						";
-						
-						$path = $ambientes[$i]->path_apks;
-						$diretorio = dir($path);
-						while($arquivo = $diretorio -> read()){
-							if ($arquivo == "." || $arquivo == ".."){
-								
+						<div class='row'>";
+							for ($x=0; $x < $num_apks; $x++) { 
+								if ($ambientes[$i]->id_ambiente == $apks[$x]->tbl_ambiente_id_ambiente){
+									echo "
+									<div class='col-md-2'>
+										<div class='btn-group'>
+										  <button style='margin-top:10px;' type='button' class='btn btn-warning dropdown-toggle' data-toggle='dropdown' aria-expanded='false'><span class='glyphicon glyphicon-phone' aria-hidden='true'></span>
+										    ".$apks[$x]->nome_apk." <span class='caret'></span>
+										  </button>
+										  <ul class='dropdown-menu' role='menu'>
+										    <li><a href='".$apks[$x]->path_apk."'><span class='glyphicon glyphicon-cloud-download' aria-hidden='true'></span> Download</a></li>
+										    <li><a href='#' id='".$apks[$x]->path_apk."' onclick='excluirApk(this.id)'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Excluir</a></li>
+										  </ul>
+										</div>
+									</div>
+									";
+								}
 							}
-							else{
-					     		echo "<div class='col-md-1'>";
-
-					     				if ($acesso == "A" || $acesso == "G"){
-							     			echo "<button id='btnExcluirApk' onclick='excluirApk(this.value)' value='".$path.$arquivo."' type='button' class='btn btn-default btn-sm btn-danger' aria-label='Left Align'>
-							     					<span class='glyphicon glyphicon-remove-circle' aria-hidden='true'></span>
-							     				  </button>";
-					     				}
-					     		echo 	"<a href='".$path.$arquivo."'>
-					     					<img src='".base_url('includes/imgs/androidlogo.png')."' style='width: 50px; margin-left: 10px;' >
-					     					<p>".$arquivo."</p>
-					     				</a>
-					     			  </div>";
-					   		}
-					   }
-					   $diretorio -> close();
-					   
+						echo "
+						</div>";
 				
-				echo "	</div>";
-				
-				if ($acesso == "A" || $acesso == "G"){
-				
-				echo "	<hr>
-						<form enctype='multipart/form-data' method='post'>
-						   <label>Upload Apk</label>
-						    <input type='text' name='caminho' style='display: none;' value='".$ambientes[$i]->path_apks."' />
-							<input type='file' id='file' name='files[]' multiple='multiple' />
-							<button name='btnUpload' type='submit'  class='btn btn-success'><span class='glyphicon glyphicon-cloud-upload' aria-hidden='true'></span> Enviar</button> 
-						</form>";
-				}
-				echo "
+						if ($acesso == "A" || $acesso == "G"){
+						
+						echo "	<hr>
+								<form enctype='multipart/form-data' method='post'>
+								   <label>Upload Apk</label>
+								    <input type='text' name='caminho' style='display: none;' value='".$ambientes[$i]->path_apk."' />
+								    <input type='text' name='id_ambiente' style='display: none;' value='".$ambientes[$i]->id_ambiente."' />
+									<input type='file' id='file' name='files[]' multiple='multiple' />
+									<button name='btnUpload' type='submit'  class='btn btn-success'><span class='glyphicon glyphicon-cloud-upload' aria-hidden='true'></span> Enviar</button> 
+								</form>";
+						}
+						echo "
 					</div>
 				</div>
 			</div>";
@@ -200,5 +170,6 @@
 	</div>
 </body>
 </html>
-	<script type="text/javascript" src="<?php echo base_url('includes/js/js.js'); ?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('includes/ajax/post.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('includes/js/js.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('includes/ajax/post.js')?>"></script>
+<?php require_once('includes/modal/modal.php'); ?>

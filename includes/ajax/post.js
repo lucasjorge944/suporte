@@ -30,32 +30,33 @@ $(document).ready(function(){
 	$("#btnSalvarAmb").click(function(){
 		
 		var nome_cidade = $("#nome_cidade").val();
-		var url_master = $("#url_master").val();
-		var url_cliente = $("#url_cliente").val();
-		var url_distribuidor = $("#url_distribuidor").val();
-		var login_master = $("#login_master").val();
-		var senha_master = $("#senha_master").val();
-		var login_gestor = $("#login_gestor").val();
-		var senha_gestor = $("#senha_gestor").val();
-		var login_distribuidor = $("#login_distribuidor").val();
-		var senha_distribuidor = $("#senha_distribuidor").val();
-		var senha_pdv = $("#senha_pdv").val();
-		var login_coletor = $("#login_coletor").val();
-		var senha_coletor = $("#senha_coletor").val();
-		var login_fiscal = $("#login_fiscal").val();
-		var senha_fiscal = $("#senha_fiscal").val();
-		var login_monitor = $("#login_monitor").val();
-		var senha_monitor = $("#senha_monitor").val();
-		
-        $.post('restrita/novoAmbiente', {btnSalvarAmb:'btnSalvarAmb', nome_cidade:nome_cidade, url_master:url_master, url_cliente:url_cliente, url_distribuidor:url_distribuidor, 
-        login_master:login_master, senha_master:senha_master, login_gestor:login_gestor, senha_gestor:senha_gestor, login_distribuidor:login_distribuidor, senha_distribuidor:senha_distribuidor,
-        senha_pdv:senha_pdv, login_coletor:login_coletor, senha_coletor:senha_coletor, login_fiscal:login_fiscal, senha_fiscal:senha_fiscal, login_monitor:login_monitor, senha_monitor:senha_monitor}, 
+
+        $.post('restrita/novoAmbiente', {btnSalvarAmb:'btnSalvarAmb', nome_cidade:nome_cidade}, 
         function(data){
         	window.location.reload();
         });
     });
 });
 
+function novoAcesso(clicked_ambiente){
+
+	var id_ambiente = clicked_ambiente;
+
+	$(document).ready(function(){
+		$("#btnSalvarAcesso").click(function(){
+			
+			var nome_acesso = $("#nome_acesso").val();
+			var link = $("#link").val();
+			var usuario = $("#usuario").val();
+			var senha = $("#senha").val();
+
+	        $.post('restrita/novoAcesso', {btnSalvarAcesso:'btnSalvarAcesso', id_ambiente:id_ambiente, nome_acesso:nome_acesso, link:link, usuario:usuario, senha:senha}, 
+	        function(data){
+	        	window.location.reload();
+	        });
+	    });
+	});
+}
 
 $(document).ready(function(){
 	$("#btnSalvarUsu").click(function(){
@@ -172,6 +173,7 @@ $(document).ready(function(){
 		
 	});
 });
+
 
 function editAmbiente(clicked_value){
 	var id_selecionado = clicked_value;

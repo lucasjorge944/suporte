@@ -1,9 +1,6 @@
-<?php 
-  header("Content-Type: text/html; charset=UTF-8");
-?>
 <!-- Modal Novo Ambiente-->
-<div class="modal fade bs-example-modal-lg" id="modalNovoAmb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+<div class="modal fade" id="modalNovoAmb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -17,75 +14,43 @@
 			     <input type="text" class="form-control" id="nome_cidade" placeholder="">
 			   </div>
 			 </div>
-	      	<div class="form-group">
-			   <label for="url_master" class="col-sm-2 control-label">Url Master: </label>
-			   <div class="col-sm-10">
-			     <input type="text" class="form-control" id="url_master" placeholder="">
-			   </div>
-			 </div>
-			 <div class="form-group">
-			   <label for="url_cliente" class="col-sm-2 control-label">Url Cliente: </label>
-			   <div class="col-sm-10">
-			     <input type="text" class="form-control" id="url_cliente" placeholder="">
-			   </div>
-			 </div>
-			 <div class="form-group">
-			   <label for="url_distribuidor" class="col-sm-2 control-label">Url Distribuidor: </label>
-			   <div class="col-sm-10">
-			     <input type="text" class="form-control" id="url_distribuidor" placeholder="">
-			   </div>
-			 </div>
-	      	<div class="row">
-			  <div class="col-md-6" style="padding: 30px;">
-			  	<div class="form-group">
-		    		<label for="login_master">Login Master: </label>
-		    		<input type="text" class="form-control" id="login_master" placeholder="">
-		    		<label for="senha_master">Senha Master: </label>
-		    		<input type="text" class="form-control" id="senha_master" placeholder="">
-		  		</div>
-		  		<div class="form-group">
-		    		<label for="login_gestor">Login Gestor: </label>
-		    		<input type="text" class="form-control" id="login_gestor" placeholder="">
-		    		<label for="senha_gestor">Senha Gestor: </label>
-		    		<input type="text" class="form-control" id="senha_gestor" placeholder="">
-		  		</div>
-		  		<div class="form-group">
-		    		<label for="login_distribuidor">Login Distribuidor: </label>
-		    		<input type="text" class="form-control" id="login_distribuidor" placeholder="">
-		    		<label for="senha_distribuidor">Senha Distribuidor: </label>
-		    		<input type="text" class="form-control" id="senha_distribuidor" placeholder="">
-		  		</div>
-		  		<div class="form-group">
-		    		<label for="senha_pdv">Senha PDV: </label>
-		    		<input type="text" class="form-control" id="senha_pdv" placeholder="">
-		  		</div>
-			  </div>
-			  <div class="col-md-6" style="padding: 30px;">
-			  	<div class="form-group">
-		    		<label for="login_coletor">Login Coletor: </label>
-		    		<input type="text" class="form-control" id="login_coletor" placeholder="">
-		    		<label for="senha_coletor">Senha Coletor: </label>
-		    		<input type="text" class="form-control" id="senha_coletor" placeholder="">
-		  		</div>
-		  		<div class="form-group">
-		    		<label for="login_fiscal">Login Fiscal: </label>
-		    		<input type="text" class="form-control" id="login_fiscal" placeholder="">
-		    		<label for="senha_fiscal">Senha Fiscal: </label>
-		    		<input type="text" class="form-control" id="senha_fiscal" placeholder="">
-		  		</div>
-		  		<div class="form-group">
-		    		<label for="login_monitor">Login Monitor: </label>
-		    		<input type="text" class="form-control" id="login_monitor" placeholder="">
-		    		<label for="senha_monitor">Senha Monitor: </label>
-		    		<input type="text" class="form-control" id="senha_monitor" placeholder="">
-		  		</div>
-			  </div>
-			</div>
 		</form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
         <button type="button" id="btnSalvarAmb" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Novo Acesso-->
+<div class="modal fade" id="modalNovoAcesso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Novo Acesso</h4>
+      </div>
+      <div class="modal-body">
+      	<form class="form-horizontal" style="padding:10px;">
+      		<div class="form-group">
+				<input type="text" class="form-control" id="nome_acesso" placeholder="Nome do Acesso">
+			 </div>
+			 <div class="form-group">
+				<input type="text" class="form-control" id="link" placeholder="Link do Acesso">
+			 </div>
+			 <div class="form-group">
+			 	<div class="row">
+			 		<div class="col-md-6"><input type="text" class="form-control" id="usuario" placeholder="Usuario do Acesso"></div>
+			 		<div class="col-md-6"><input type="text" class="form-control" id="senha" placeholder="Senha do Acesso"></div>
+				</div>
+			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button type="button" id="btnSalvarAcesso" class="btn btn-primary">Salvar</button>
       </div>
     </div>
   </div>

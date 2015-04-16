@@ -28,6 +28,22 @@
 				$this->db->update('tbl_ambiente', $dados);
 			}
 		}
+		
+		public function insertAcesso($dados){
+			$this->db->insert('tbl_acesso', $dados);
+		}
+
+		public function getAcessos(){
+			return $this->db->get('tbl_acesso')->result();
+		}
+
+		public function insertApk($dados){
+			$this->db->insert('tbl_apk', $dados);
+		}
+
+		public function getApks(){
+			return $this->db->get('tbl_apk')->result();
+		}
 	}	
 
 ?>
