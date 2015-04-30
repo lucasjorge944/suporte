@@ -56,6 +56,50 @@
   </div>
 </div>
 
+<!-- Modal Edit Acesso-->
+<div class="modal fade" id="modalEditAcesso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Editar Acesso</h4>
+      </div>
+      <div class="modal-body">
+      	<form class="form-horizontal" style="padding:10px;">
+      		<div class="form-group" style="display:none;">
+      			<label for="edit_id_acesso">Id Acesso:</label>
+				<input type="text" class="form-control" id="edit_id_acesso" placeholder="Id do Acesso">
+			 </div>
+      		<div class="form-group">
+      			<label for="edit_nome_acesso">Nome Acesso:</label>
+				<input type="text" class="form-control" id="edit_nome_acesso" placeholder="Nome do Acesso">
+			 </div>
+			 <div class="form-group">
+			 	<label for="edit_link">Link:</label>
+				<input type="text" class="form-control" id="edit_link" placeholder="Link do Acesso">
+			 </div>
+			 <div class="form-group">
+			 	<div class="row">
+			 		<div class="col-md-6">
+			 			<label for="edit_usuario">Usuario:</label>
+			 			<input type="text" class="form-control" id="edit_usuario" placeholder="Usuario do Acesso">
+			 		</div>
+			 		<div class="col-md-6">
+			 			<label for="edit_senha">Senha:</label>
+			 			<input type="text" class="form-control" id="edit_senha" placeholder="Senha do Acesso">
+			 		</div>
+				</div>
+			</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        <button type="button" id="btnSalvarEditAcesso" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Modal Edit Ambiente-->
 <div class="modal fade bs-example-modal-lg" id="modalEditAmb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -325,6 +369,26 @@
 		</button>
       </div>
       <div class="modal-footer"> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit Salvo-->
+<div class="modal fade bs-example-modal-sm" id="myModalEditSalvo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <button type="button" id='btnConfirmarApk' class="btn btn-success" aria-label="Left Align" style="float:left;margin-right:10px;">
+		  <span class="glyphicon glyphicon-ok" aria-hidden="true" style="float:left;"></span>
+		</button>
+		<h4>Acesso atualizado com sucesso!</h4>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-default" onclick="window.location.reload();">Fechar</button>
       </div>
     </div>
   </div>

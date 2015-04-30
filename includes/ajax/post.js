@@ -301,7 +301,56 @@ $(document).ready(function(){
 	});
 });
 
+function editAcesso(acesso_id){
+	var id_acesso = acesso_id;
+	$.ajax({
+		url: 'restrita/editAcesso',
+		type: 'POST',
+		data: {id_acesso: id_acesso},
+	})
+	.done(function(data) {
+		var acessos = JSON.parse(data);
 
+		document.getElementById("edit_id_acesso").value 	= acessos.id_acesso;
+		document.getElementById("edit_nome_acesso").value 	= acessos.nome_acesso;
+		document.getElementById("edit_link").value 			= acessos.link;
+		document.getElementById("edit_usuario").value 		= acessos.usuario;
+		document.getElementById("edit_senha").value 		= acessos.senha;
 
+		$("#modalEditAcesso").modal("show");
+	})
+	.fail(function() {
+		
+	})
+	.always(function() {
+		
+	});
+}
 
+$(document).ready(function(){
+	$("#btnSalvarEditAcesso").click(function(){
 
+		var id_acesso = document.getElementById("edit_id_acesso").value;
+		var nome_acesso = document.getElementById("edit_nome_acesso").value;
+		var link = document.getElementById("edit_link").value;
+		var usuario = document.getElementById("edit_usuario").value;
+		var senha = document.getElementById("edit_senha").value;
+
+		$.ajax({
+			url: 'restrita/updateAcesso',
+			type: 'POST',
+			data: {id_acesso: id_acesso, nome_acesso:nome_acesso, link:link, usuario:usuario, senha:senha },
+		})
+		.done(function(data) {
+			$("#myModalEditSalvo").modal("show");
+			setTimeout('window.location.reload();', 1700);
+		})
+		.fail(function() {
+			//console.log("error");
+		})
+		.always(function() {
+			//console.log("complete");
+		});
+		
+	});
+});

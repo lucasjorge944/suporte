@@ -79,7 +79,19 @@
 								'tbl_ambiente_id_ambiente' 	=> $id_ambiente,
 							);
 							
-							$this->ambiente_model->insertApk($dados_apk);
+							$resultado_apks = $this->ambiente_model->getApks_id($dados_apk['tbl_ambiente_id_ambiente']);
+							$array_paths = array('');
+	
+							foreach ($resultado_apks as $res) {
+								array_push($array_paths, $res->path_apk);
+							}
+
+							if (in_array($dados_apk['path_apk'], $array_paths)){
+								
+							}
+							else{
+								$this->ambiente_model->insertApk($dados_apk);
+							}
 				        }
 				    }
 				}
@@ -170,6 +182,29 @@
 		public function getUsuario(){
 			$resultado = $this->usuario_model->getUsuario($_POST['usuario_logado']);
 			echo json_encode($resultado);
+		}
+
+		public function editAcesso(){
+			$id_acesso = $_POST['id_acesso'];
+			$result = $this->ambiente_model->getAcessos_id($id_acesso);
+			echo json_encode($result[0]);
+		}
+
+		public function updateAcesso(){
+			$id_acesso = $_POST['id_acesso'];
+			$nome_acesso = $_POST['nome_acesso'];
+			$link = $_POST['link'];
+			$usuario = $_POST['usuario'];
+			$senha = $_POST['senha'];
+
+			$dados = array(
+				'nome_acesso' 	=> $nome_acesso,
+				'link' 			=> $link,
+				'usuario' 		=> $usuario,
+				'senha' 		=> $senha,
+			);
+
+			$this->ambiente_model->updateAcesso($id_acesso, $dados);
 		}
 
 		public function saveEdit(){		

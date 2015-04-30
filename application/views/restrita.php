@@ -96,44 +96,60 @@
 				</div>
 				<div id='collapse".$i."' class='panel-collapse collapse' role='tabpanel' aria-labelledby='heading".$i."'>
 					<div class='panel-body'>
-						<div class='row'>
-							<div class='col-md-6'>";
-
-								for ($x=0; $x < $num_acessos; $x++) { 
+						<div class='row'>";
+						for ($x=0; $x < $num_acessos; $x++) { 
 									if ($ambientes[$i]->id_ambiente == $acessos_ambientes[$x]->tbl_ambiente_id_ambiente){
+							echo "
+							<div class='col-xs-12 col-sm-6 col-md-6'>
 
-										echo "
+										
 										<h3><span id='bold'>".$acessos_ambientes[$x]->nome_acesso."</span></h3>
-										<h4><span id='bold'>Link:</span> <a target='_blank' href='".$acessos_ambientes[$x]->link."'>".$acessos_ambientes[$x]->link."</a></h4>
-										<button class='btn btn-info btn-lg btnEditAcesso'> 
-											<span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Editar
-										</button>
+										<h4><span id='bold'>Link:</span> <a target='_blank' href='".$acessos_ambientes[$x]->link."'>".$acessos_ambientes[$x]->link."</a></h4>";
+										if ($acesso == "A" || $acesso == "G"){
+											echo "
+											<button id='".$acessos_ambientes[$x]->id_acesso."' class='btn btn-info btn-lg btnEditAcesso' onclick='editAcesso(this.id)'> 
+												<span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Editar
+											</button>";
+										}
+										echo "
 										<h4><span id='bold'>Usuário:</span> ".$acessos_ambientes[$x]->usuario."</h4>
-										<h4><span id='bold'>Senha:</span> ".$acessos_ambientes[$x]->senha."</h4>";
-
-									}
+										<h4><span id='bold'>Senha:</span> ".$acessos_ambientes[$x]->senha."</h4>
+						
+							</div>";
 								}
+							}
 						echo "
-							</div>
-						</div>						
-						<div class='row'>
-						  <div class='col-md-6'>
-						  	<button id='".$ambientes[$i]->id_ambiente."' type='button' class='btn btn-primary btn-lg btn-block' data-toggle='modal' data-target='#modalNovoAcesso' onclick='novoAcesso(this.id)'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Novo Acesso</button>
-						  </div>
-						</div>
+						</div>	";	
+
+						if ($acesso == "A" || $acesso == "G"){
+						echo"			
+							<div class='row'>
+							  <div class='col-md-6'>
+							  	<button id='".$ambientes[$i]->id_ambiente."' type='button' class='btn btn-primary btn-lg btn-block' data-toggle='modal' data-target='#modalNovoAcesso' onclick='novoAcesso(this.id)'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Novo Acesso</button>
+							  </div>
+							</div>";
+						}
+
+						echo "
 						<hr>
 						<div class='row'>";
 							for ($x=0; $x < $num_apks; $x++) { 
 								if ($ambientes[$i]->id_ambiente == $apks[$x]->tbl_ambiente_id_ambiente){
 									echo "
-									<div class='col-md-2'>
+									<div class='col-xs-6 col-sm-4 col-md-2'>
 										<div class='btn-group'>
-										  <button style='margin-top:10px;' type='button' class='btn btn-warning dropdown-toggle' data-toggle='dropdown' aria-expanded='false'><span class='glyphicon glyphicon-phone' aria-hidden='true'></span>
+										  <button style='margin-top:10px;' type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-expanded='false'><span class='glyphicon glyphicon-phone' aria-hidden='true'></span>
 										    ".$apks[$x]->nome_apk." <span class='caret'></span>
 										  </button>
 										  <ul class='dropdown-menu' role='menu'>
-										    <li><a href='".$apks[$x]->path_apk."'><span class='glyphicon glyphicon-cloud-download' aria-hidden='true'></span> Download</a></li>
-										    <li><a href='#' id='".$apks[$x]->path_apk."' onclick='excluirApk(this.id)'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Excluir</a></li>
+										    <li><a href='".$apks[$x]->path_apk."'><span class='glyphicon glyphicon-cloud-download' aria-hidden='true'></span> Download</a></li>";
+
+										    if ($acesso == "A" || $acesso == "G"){
+
+										    	echo"
+										    	<li><a href='#' id='".$apks[$x]->path_apk."' onclick='excluirApk(this.id)'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Excluir</a></li>";
+											}
+										    echo "
 										  </ul>
 										</div>
 									</div>

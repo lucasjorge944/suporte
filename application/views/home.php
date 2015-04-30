@@ -1,3 +1,6 @@
+<?php 
+  header("Content-Type: text/html; charset=UTF-8");
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -150,3 +153,4 @@
 	<script type="text/javascript" src="<?php echo base_url('includes/js/js.js')?>"></script>
 	<!-- Bootstrap -->
 	<script src="<?php echo base_url('includes/bootstrap/js/bootstrap.min.js'); ?>"></script>
+	<?php require_once('includes/modal/modal.php');	?>

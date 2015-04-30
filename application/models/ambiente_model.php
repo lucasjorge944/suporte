@@ -37,12 +37,29 @@
 			return $this->db->get('tbl_acesso')->result();
 		}
 
+		public function getAcessos_id($id){
+			$this->db->where('id_acesso', $id);
+			return $this->db->get('tbl_acesso')->result();
+		}
+
 		public function insertApk($dados){
 			$this->db->insert('tbl_apk', $dados);
 		}
 
 		public function getApks(){
 			return $this->db->get('tbl_apk')->result();
+		}
+
+		public function getApks_id($id){
+			$this->db->where('tbl_ambiente_id_ambiente', $id);
+			return $this->db->get('tbl_apk')->result();
+		}
+
+		public function updateAcesso($id_acesso=null, $dados=null){
+			if ($id_acesso != null && $dados != null){
+				$this->db->where('id_acesso', $id_acesso);
+				$this->db->update('tbl_acesso', $dados);
+			}
 		}
 	}	
 

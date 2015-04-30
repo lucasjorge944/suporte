@@ -27,7 +27,6 @@
 
 			}
 			
-			require_once('includes/modal/modal.php');	
 			$this->load->view('home', $dados);
 		}
 		
