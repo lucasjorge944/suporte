@@ -11,7 +11,7 @@
 		<title>Restrita - ti.mob - Info & Donwloads</title>
 		<meta name="description" content="">
 		<meta name="author" content="ckt.lucas">
-		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="icon" type="image/png" href="<?php echo base_url('icon.png'); ?>">
 		<link rel="shortcut icon" type="image/png" href="<?php echo base_url('icon.png'); ?>">
@@ -101,8 +101,6 @@
 									if ($ambientes[$i]->id_ambiente == $acessos_ambientes[$x]->tbl_ambiente_id_ambiente){
 							echo "
 							<div class='col-xs-12 col-sm-6 col-md-6'>
-
-										
 										<h3><span id='bold'>".$acessos_ambientes[$x]->nome_acesso."</span></h3>
 										<h4><span id='bold'>Link:</span> <a target='_blank' href='".$acessos_ambientes[$x]->link."'>".$acessos_ambientes[$x]->link."</a></h4>";
 										if ($acesso == "A" || $acesso == "G"){
