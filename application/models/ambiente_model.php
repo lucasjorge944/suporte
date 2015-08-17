@@ -3,6 +3,7 @@
 	class Ambiente_model extends CI_Model{
 		
 		public function getAmbientes(){
+			//$this->db->where($array_where);
 			return $this->db->get('tbl_ambiente')->result();
 		}
 		

@@ -1,6 +1,6 @@
 <!-- Modal Novo Ambiente-->
-<div class="modal fade" id="modalNovoAmb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade bs-example-modal-lg" id="modalNovoAmb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -8,12 +8,29 @@
       </div>
       <div class="modal-body">
       	<form class="form-horizontal" method="post">
-      		<div class="form-group">
-			   <label for="nome_cidade" class="col-sm-2 control-label">Cidade: </label>
-			   <div class="col-sm-10">
-			     <input type="text" class="form-control" id="nome_cidade" placeholder="">
-			   </div>
-			 </div>
+      		<div class="row">
+      			<div class="col-xs-12 col-sm-12 col-md-8">
+	      			<div class="form-group">
+					   <label for="nome_cidade" class="col-sm-2 control-label">Cidade: </label>
+					   <div class="col-sm-10">
+					     <input type="text" class="form-control" id="nome_cidade">
+					   </div>
+				 	</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-4">
+	      			<div class="form-group">
+	      				<div class="col-sm-10">
+						   	<select id="tipo_ambiente" class="form-control">
+							  <option value="demo">Demonstração</option>
+							  <option value="test">Homologação</option>
+							  <option value="tr">Treinamento</option>
+							  <option value="upd">Atualização</option>
+							  <option value="prod">Produção</option>
+							</select>
+						</div>
+				 	</div>
+				</div>
+			</div>
 		</form>
       </div>
       <div class="modal-footer">
@@ -223,6 +240,51 @@
 			  <option value="V">Visitante</option>
 			</select>
 		  </div>
+		  <span class="label label-primary" style="font-size: 15px;">Acessos:</span>
+		  <div class="form-group">
+		   	<div class="row">
+			  <div class="col-xs-12 col-sm-6 col-md-6">
+			    <div class="input-group">
+			      <span class="input-group-addon">
+			        <input id="checkDemo" type="checkbox" aria-label="..."> 
+			      </span>
+			      <input type="text" class="form-control" aria-label="..." value="Demonstração" disabled>
+			    </div><!-- /input-group -->
+			  </div><!-- /.col-lg-6 -->
+			  <div class="col-xs-12 col-sm-6 col-md-6">
+			    <div class="input-group">
+			      <span class="input-group-addon">
+			        <input id="checkTest" type="checkbox" aria-label="...">
+			      </span>
+			      <input type="text" class="form-control" aria-label="..." value="Homologação" disabled>
+			    </div><!-- /input-group -->
+			  </div><!-- /.col-lg-6 -->
+			  <div class="col-xs-12 col-sm-6 col-md-6">
+			    <div class="input-group">
+			      <span class="input-group-addon">
+			        <input id="checkTr" type="checkbox" aria-label="...">
+			      </span>
+			      <input type="text" class="form-control" aria-label="..." value="Treinamento" disabled>
+			    </div><!-- /input-group -->
+			  </div><!-- /.col-lg-6 -->
+			  <div class="col-xs-12 col-sm-6 col-md-6">
+			    <div class="input-group">
+			      <span class="input-group-addon">
+			        <input id="checkUpd" type="checkbox" aria-label="...">
+			      </span>
+			      <input type="text" class="form-control" aria-label="..." value="Atualização" disabled>
+			    </div><!-- /input-group -->
+			  </div><!-- /.col-lg-6 -->
+			  <div class="col-xs-12 col-sm-6 col-md-6">
+			    <div class="input-group">
+			      <span class="input-group-addon">
+			        <input id="checkProd" type="checkbox" aria-label="...">
+			      </span>
+			      <input type="text" class="form-control" aria-label="..." value="Produção" disabled>
+			    </div><!-- /input-group -->
+			  </div><!-- /.col-lg-6 -->
+			</div><!-- /.row -->
+		  </div>
 		</form>
       </div>
       <div class="modal-footer">
@@ -386,6 +448,101 @@
 		  <span class="glyphicon glyphicon-ok" aria-hidden="true" style="float:left;"></span>
 		</button>
 		<h4>Acesso atualizado com sucesso!</h4>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-default" onclick="window.location.reload();">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit Salvo-->
+<div class="modal fade bs-example-modal-lg" id="myModalUsuarios" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Usuários</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="table-responsive">
+	      	<table class="table table-hover table-condensed">
+	      		<thead>
+	      			<tr>
+	      				<th>Nome</th>
+	      				<th>Usuário</th>
+	      				<th>Senha</th>
+	      				<th>Acesso</th>
+	      				<th>Demo</th>
+	      				<th>Hom</th>
+	      				<th>Tr</th>
+	      				<th>Atua</th>
+	      				<th>Prod</th>
+	      			</tr>
+	      		</thead>
+				 <tr>
+				    <td>Lucas</td>
+				    <td>lucas.antunes</td>
+				    <td><label id="<?php echo 1; ?>" onclick="edit_senha(this.id);this.style.display='none';">*******</label><input type="password" class="form-control" id="edit_senha<?php echo 1; ?>" style="display:none;"></td>  
+				    <td>
+				    	<select class="form-control">
+						  <option>Administrador</option>
+						  <option>Gerenciador</option>
+						  <option>Visitante</option>
+						</select>
+				    </td>
+				    <td>
+				    	<center>
+					    	<div class="checkbox">
+							  <label>
+							    <input type="checkbox" value="demo">
+							    
+							  </label>
+							</div>
+						</center>
+				    </td>
+				    <td>
+				    	<center>
+					    	<div class="checkbox">
+							  <label>
+							    <input type="checkbox" value="test">
+							    
+							  </label>
+							</div>
+						</center>
+				    </td>
+				    <td>
+				    	<center>
+					    	<div class="checkbox">
+							  <label>
+							    <input type="checkbox" value="tr">
+							    
+							  </label>
+							</div>
+						</center>
+				    </td>
+				    <td>
+				    	<center>
+					    	<div class="checkbox">
+							  <label>
+							    <input type="checkbox" value="upd">
+							    
+							  </label>
+							</div>
+						</center>
+				    </td>
+				    <td>
+				    	<center>
+					    	<div class="checkbox">
+							  <label>
+							    <input type="checkbox" value="prod">
+							    
+							  </label>
+							</div>
+						</center>
+				    </td>
+				 </tr>
+			</table>
+		</div>
       </div>
       <div class="modal-footer">
       	<button type="button" class="btn btn-default" onclick="window.location.reload();">Fechar</button>

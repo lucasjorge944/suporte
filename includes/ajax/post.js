@@ -30,8 +30,11 @@ $(document).ready(function(){
 	$("#btnSalvarAmb").click(function(){
 		
 		var nome_cidade = $("#nome_cidade").val();
+		var tipo_ambiente = $("#tipo_ambiente").val();
+		var tipo_ambiente_nome = $("#tipo_ambiente option:selected").text();
 
-        $.post('restrita/novoAmbiente', {btnSalvarAmb:'btnSalvarAmb', nome_cidade:nome_cidade}, 
+
+        $.post('restrita/novoAmbiente', {btnSalvarAmb:'btnSalvarAmb', nome_cidade:nome_cidade, tipo_ambiente:tipo_ambiente, tipo_ambiente_nome:tipo_ambiente_nome}, 
         function(data){
         	window.location.reload();
         });
@@ -68,12 +71,48 @@ $(document).ready(function(){
 		var email = $("#txtEmail").val();
 		var acesso = $("#acesso").val();
 
+
+		if (document.getElementById("checkDemo").checked == true){
+			var demo = 1;
+		}
+		else{
+			var demo = 0;
+		}
+
+		if (document.getElementById("checkTest").checked == true){
+			var test = 1;
+		}
+		else{
+			var test = 0;
+		}
+
+		if (document.getElementById("checkTr").checked == true){
+			var tr = 1;
+		}
+		else{
+			var tr = 0;
+		}
+
+		if (document.getElementById("checkUpd").checked == true){
+			var upd = 1;
+		}
+		else{
+			var upd = 0;
+		}
+
+		if (document.getElementById("checkProd").checked == true){
+			var prod = 1;
+		}
+		else{
+			var prod = 0;
+		}
+
 		
 			if (senha == senha2){
 				$.ajax({
 				url: 'restrita/novoUsuario',
 				type: 'POST',
-				data: {nome:nome, usuario:usuario, senha:senha, email:email, acesso:acesso},
+				data: {nome:nome, usuario:usuario, senha:senha, email:email, acesso:acesso, demo:demo, test:test, tr:tr, upd:upd, prod:prod},
 				})
 				.done(function(data) {
 					if (data == 0){
@@ -311,6 +350,8 @@ function editAcesso(acesso_id){
 	.done(function(data) {
 		var acessos = JSON.parse(data);
 
+		alert(acessos.id_acesso);
+
 		document.getElementById("edit_id_acesso").value 	= acessos.id_acesso;
 		document.getElementById("edit_nome_acesso").value 	= acessos.nome_acesso;
 		document.getElementById("edit_link").value 			= acessos.link;
@@ -350,6 +391,25 @@ $(document).ready(function(){
 		})
 		.always(function() {
 			//console.log("complete");
+		});
+		
+	});
+});
+
+$(document).ready(function() {
+	$("#btnUsuarios").click(function() {
+		$.ajax({
+			url: 'restrita/getAllUsers',
+			type: 'POST',
+		})
+		.done(function(data) {
+			
+		})
+		.fail(function() {
+			
+		})
+		.always(function() {
+			
 		});
 		
 	});
