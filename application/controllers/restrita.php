@@ -20,32 +20,36 @@
 				'num_acessos' => null,
 				'apks' => null,
 				'num_apks' => null,
+				'tipos' => null,
 			);
 			
 			$sessao_on = $dados['sessao'];
-			
+
+
 			if (array_key_exists('username', $sessao_on)){
 				
 			}
 			else{
 				header("Location: home");
 			}
+
 			
-			
+			$result_tipos = $this->usuario_model->getTipos($dados['sessao']['username']);
 			$resultado = $this->ambiente_model->getAmbientes();
 			$result_acessos = $this->ambiente_model->getAcessos();
 			$result_apks = $this->ambiente_model->getApks();
 			$resultado_usu = $this->usuario_model->getUsuario($dados['sessao']['username']);
-			$rows = count($resultado);			
+			$rows = count($resultado);		
 			
+			$dados['tipos'] = $result_tipos;
 			$dados['ambientes'] = $resultado;
 			$dados['num_ambientes'] = $rows;
 			$dados['acesso'] = $resultado_usu->acesso;
 			$dados['acessos_ambientes'] = $result_acessos;
 			$dados['num_acessos'] = count($result_acessos);
 			$dados['apks'] = $result_apks;
-			$dados['num_apks'] = count($result_apks);
-			
+			$dados['num_apks'] = count($result_apks);	
+
 			$valid_formats = array("apk");
 			$max_file_size = 1024 * 1024 * 10; // 10Mb			
 			$count = 0;
@@ -110,6 +114,8 @@
 			if (isset($_POST['btnSalvarAmb'])){
 				
 				$nome_cidade = $_POST['nome_cidade'];
+				$tipo_ambiente = $_POST['tipo_ambiente'];
+				$tipo_ambiente_nome = $_POST['tipo_ambiente_nome'];
 				
 				$resultado = $this->ambiente_model->getMaxId()->result();
 
@@ -120,6 +126,8 @@
 				
 				$dados = array(
 					'nome_ambiente' 				=> $nome_cidade,
+					'tipo_ambiente' 				=> $tipo_ambiente,
+					'tipo_ambiente_nome' 				=> $tipo_ambiente_nome,
 					'ativo' 				=> 'S',
 					'path_apk' 				=> $path,
 				);
@@ -155,6 +163,11 @@
 			$senha = $_POST['senha'];
 			$email = $_POST['email'];
 			$acesso = $_POST['acesso'];
+			$demo = $_POST['demo'];
+			$test = $_POST['test'];
+			$tr = $_POST['tr'];
+			$upd = $_POST['upd'];
+			$prod = $_POST['prod'];
 			
 			$resultado = $this->usuario_model->getUsuario($usuario);
 			
@@ -172,6 +185,11 @@
 						'senha' 	=> $_senha,
 						'email' 	=> $email,
 						'acesso' 	=> $acesso,
+						'demo' 		=> $demo,
+						'test' 		=> $test,
+						'tr' 		=> $tr,
+						'upd' 		=> $upd,
+						'prod' 		=> $prod
 					);
 				
 				$this->usuario_model->insertUsuario($dados);
@@ -181,6 +199,11 @@
 		
 		public function getUsuario(){
 			$resultado = $this->usuario_model->getUsuario($_POST['usuario_logado']);
+			echo json_encode($resultado);
+		}
+
+		public function getAcessos(){
+			$resultado = $this->usuario_model->getAcessos($_POST['usuario_logado']);
 			echo json_encode($resultado);
 		}
 
@@ -228,38 +251,20 @@
 			echo json_encode($resultado);			
 		}
 		
-		public function saveEditAmbiente(){
-			$id_ambiente = $_POST['id_ambiente'];
-			
-			
-			
-			$dados = $arrayName = array(
-				'nome' => $_POST['nome'],
-				'url_master' => $_POST['url_master'],
-				'url_cliente' => $_POST['url_cliente'],
-				'url_distribuidor' => $_POST['url_distribuidor'],
-				'login_master' => $_POST['login_master'],
-				'senha_master' => $_POST['senha_master'],
-				'login_gestor' => $_POST['login_gestor'],
-				'senha_gestor' => $_POST['senha_gestor'],
-				'login_distribuidor' => $_POST['login_distribuidor'],
-				'senha_distribuidor' => $_POST['senha_distribuidor'],
-				'senha_pdv' => $_POST['senha_pdv'],
-				'login_coletor' => $_POST['login_coletor'],
-				'senha_coletor' => $_POST['senha_coletor'],
-				'login_fiscal' => $_POST['login_fiscal'],
-				'senha_fiscal' => $_POST['senha_fiscal'], 
-				'login_monitor' => $_POST['login_monitor'], 
-				'senha_monitor' => $_POST['senha_monitor'], 
-			);
-			
-			$this->ambiente_model->updateAmbiente($id_ambiente, $dados);
-		}
-		
 		public function sair(){
 			if (isset($_POST['btnSair'])){
 				$this->session->sess_destroy();		
 			}
+		}
+
+		public function getAllUsers(){
+			$resultado_all_users = $this->usuario_model->getAllUsers();
+
+			echo $resultado_all_users;
+			
+			$dados = array(
+				'allUsers' => $resultado_all_users,
+			);
 		}
 	}
 

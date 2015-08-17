@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/suporte/';
+$config['base_url']	= 'http://192.168.41.128/suporte/';
 
 /*
 |--------------------------------------------------------------------------

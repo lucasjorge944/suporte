@@ -73,7 +73,7 @@
 			  if ($acesso == "A"){
 			  	echo "
 				  <div class='col-md-4'>
-				  	<button type='button' id='btnUsuarios' class='btn btn-default btn-lg btn-block' data-toggle='modal' data-target=''> <span class='glyphicon glyphicon-user' aria-hidden='true'></span> Usuários</button>
+				  	<button type='button' id='btnUsuarios' class='btn btn-default btn-lg btn-block' data-toggle='modal' data-target='#myModalUsuarios'> <span class='glyphicon glyphicon-user' aria-hidden='true'></span> Usuários</button>
 				  </div>
 			  	";
 			  }
@@ -83,96 +83,111 @@
 	</div>
 	<div class="container meio">
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-			<?php	
+			<?php
+
 			for ($i=0; $i < $num_ambientes; $i++) {
-				echo "
-			<div class='panel panel-default'>
-				<div class='panel-heading' role='tab' id='heading".$i."'>
-					<h4 class='panel-title'>
-						<a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse".$i."' aria-expanded='false' aria-controls='collapse".$i."'>
-							<span class='glyphicon glyphicon-menu-down' aria-hidden='true'></span> ".$ambientes[$i]->nome_ambiente."
-						</a>
-					</h4>
-				</div>
-				<div id='collapse".$i."' class='panel-collapse collapse' role='tabpanel' aria-labelledby='heading".$i."'>
-					<div class='panel-body'>
-						<div class='row'>";
-						for ($x=0; $x < $num_acessos; $x++) { 
-									if ($ambientes[$i]->id_ambiente == $acessos_ambientes[$x]->tbl_ambiente_id_ambiente){
-							echo "
-							<div class='col-xs-12 col-sm-6 col-md-6'>
-										<h3><span id='bold'>".$acessos_ambientes[$x]->nome_acesso."</span></h3>
-										<h4><span id='bold'>Link:</span> <a target='_blank' href='".$acessos_ambientes[$x]->link."'>".$acessos_ambientes[$x]->link."</a></h4>";
-										if ($acesso == "A" || $acesso == "G"){
-											echo "
-											<button id='".$acessos_ambientes[$x]->id_acesso."' class='btn btn-info btn-lg btnEditAcesso' onclick='editAcesso(this.id)'> 
-												<span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Editar
-											</button>";
-										}
-										echo "
-										<h4><span id='bold'>Usuário:</span> ".$acessos_ambientes[$x]->usuario."</h4>
-										<h4><span id='bold'>Senha:</span> ".$acessos_ambientes[$x]->senha."</h4>
-						
-							</div>";
-								}
-							}
-						echo "
-						</div>	";	
-
-						if ($acesso == "A" || $acesso == "G"){
-						echo"			
-							<div class='row'>
-							  <div class='col-md-6'>
-							  	<button id='".$ambientes[$i]->id_ambiente."' type='button' class='btn btn-primary btn-lg btn-block' data-toggle='modal' data-target='#modalNovoAcesso' onclick='novoAcesso(this.id)'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Novo Acesso</button>
-							  </div>
-							</div>";
-						}
-
-						echo "
-						<hr>
-						<div class='row'>";
-							for ($x=0; $x < $num_apks; $x++) { 
-								if ($ambientes[$i]->id_ambiente == $apks[$x]->tbl_ambiente_id_ambiente){
+				if ($ambientes[$i]->tipo_ambiente == 'prod' && $tipos->prod == 0){}
+				else{
+					if ($ambientes[$i]->tipo_ambiente == 'tr' && $tipos->tr == 0){}
+					else{
+						if ($ambientes[$i]->tipo_ambiente == 'test' && $tipos->test == 0){}
+						else{
+							if ($ambientes[$i]->tipo_ambiente == 'demo' && $tipos->demo == 0){}
+							else{
+								if ($ambientes[$i]->tipo_ambiente == 'upd' && $tipos->upd == 0){}
+								else{
 									echo "
-									<div class='col-xs-6 col-sm-4 col-md-2'>
-										<div class='btn-group'>
-										  <button style='margin-top:10px;' type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-expanded='false'><span class='glyphicon glyphicon-phone' aria-hidden='true'></span>
-										    ".$apks[$x]->nome_apk." <span class='caret'></span>
-										  </button>
-										  <ul class='dropdown-menu' role='menu'>
-										    <li><a href='".$apks[$x]->path_apk."'><span class='glyphicon glyphicon-cloud-download' aria-hidden='true'></span> Download</a></li>";
+								<div class='panel panel-default'>
+									<div class='panel-heading' role='tab' id='heading".$i."'>
+										<h4 class='panel-title'>
+											<a class='collapsed' data-toggle='collapse' data-parent='#accordion' href='#collapse".$i."' aria-expanded='false' aria-controls='collapse".$i."'>
+												<span class='glyphicon glyphicon-menu-down' aria-hidden='true'></span> ".$ambientes[$i]->nome_ambiente.' - <strong>'.$ambientes[$i]->tipo_ambiente_nome.'</strong>'."
+											</a>
+										</h4>
+									</div>
+									<div id='collapse".$i."' class='panel-collapse collapse' role='tabpanel' aria-labelledby='heading".$i."'>
+										<div class='panel-body'>
+											<div class='row'>";
+											for ($x=0; $x < $num_acessos; $x++) { 
+														if ($ambientes[$i]->id_ambiente == $acessos_ambientes[$x]->tbl_ambiente_id_ambiente){
+												echo "
+												<div class='col-xs-12 col-sm-6 col-md-6'>
+															<h3><span id='bold'>".$acessos_ambientes[$x]->nome_acesso."</span></h3>
+															<h4><span id='bold'>Link:</span> <a target='_blank' href='".$acessos_ambientes[$x]->link."'>".$acessos_ambientes[$x]->link."</a></h4>";
+															if ($acesso == "A" || $acesso == "G"){
+																echo "
+																<button id='".$acessos_ambientes[$x]->id_acesso."' class='btn btn-info btn-lg btnEditAcesso' onclick='editAcesso(this.id)'> 
+																	<span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Editar
+																</button>";
+															}
+															echo "
+															<h4><span id='bold'>Usuário:</span> ".$acessos_ambientes[$x]->usuario."</h4>
+															<h4><span id='bold'>Senha:</span> ".$acessos_ambientes[$x]->senha."</h4>
+											
+												</div>";
+													}
+												}
+											echo "
+											</div>	";	
 
-										    if ($acesso == "A" || $acesso == "G"){
-
-										    	echo"
-										    	<li><a href='#' id='".$apks[$x]->path_apk."' onclick='excluirApk(this.id)'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Excluir</a></li>";
+											if ($acesso == "A" || $acesso == "G"){
+											echo"			
+												<div class='row'>
+												  <div class='col-md-6'>
+												  	<button id='".$ambientes[$i]->id_ambiente."' type='button' class='btn btn-primary btn-lg btn-block' data-toggle='modal' data-target='#modalNovoAcesso' onclick='novoAcesso(this.id)'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span> Novo Acesso</button>
+												  </div>
+												</div>";
 											}
-										    echo "
-										  </ul>
+
+											echo "
+											<hr>
+											<div class='row'>";
+												for ($x=0; $x < $num_apks; $x++) { 
+													if ($ambientes[$i]->id_ambiente == $apks[$x]->tbl_ambiente_id_ambiente){
+														echo "
+														<div class='col-xs-12 col-sm-6 col-md-3'>
+															<div class='btn-group'>
+															  <button style='margin-top:10px;' type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-expanded='false'><span class='glyphicon glyphicon-phone' aria-hidden='true'></span>
+															    ".$apks[$x]->nome_apk." <span class='caret'></span>
+															  </button>
+															  <ul class='dropdown-menu' role='menu'>
+															    <li><a href='".$apks[$x]->path_apk."'><span class='glyphicon glyphicon-cloud-download' aria-hidden='true'></span> Download</a></li>";
+
+															    if ($acesso == "A" || $acesso == "G"){
+
+															    	echo"
+															    	<li><a href='#' id='".$apks[$x]->path_apk."' onclick='excluirApk(this.id)'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Excluir</a></li>";
+																}
+															    echo "
+															  </ul>
+															</div>
+														</div>
+														";
+													}
+												}
+											echo "
+											</div>";
+									
+											if ($acesso == "A" || $acesso == "G"){
+											
+											echo "	<hr>
+													<form enctype='multipart/form-data' method='post'>
+													   <label>Upload Apk</label>
+													    <input type='text' name='caminho' style='display: none;' value='".$ambientes[$i]->path_apk."' />
+													    <input type='text' name='id_ambiente' style='display: none;' value='".$ambientes[$i]->id_ambiente."' />
+														<input type='file' id='file' name='files[]' multiple='multiple' />
+														<button name='btnUpload' type='submit'  class='btn btn-success'><span class='glyphicon glyphicon-cloud-upload' aria-hidden='true'></span> Enviar</button> 
+													</form>";
+											}
+											echo "
 										</div>
 									</div>
-									";
+								</div>";
 								}
 							}
-						echo "
-						</div>";
-				
-						if ($acesso == "A" || $acesso == "G"){
-						
-						echo "	<hr>
-								<form enctype='multipart/form-data' method='post'>
-								   <label>Upload Apk</label>
-								    <input type='text' name='caminho' style='display: none;' value='".$ambientes[$i]->path_apk."' />
-								    <input type='text' name='id_ambiente' style='display: none;' value='".$ambientes[$i]->id_ambiente."' />
-									<input type='file' id='file' name='files[]' multiple='multiple' />
-									<button name='btnUpload' type='submit'  class='btn btn-success'><span class='glyphicon glyphicon-cloud-upload' aria-hidden='true'></span> Enviar</button> 
-								</form>";
 						}
-						echo "
-					</div>
-				</div>
-			</div>";
-				
+					}
+				}	
 			}
 			
 			?>
@@ -184,6 +199,6 @@
 	</div>
 </body>
 </html>
-<script type="text/javascript" src="<?php echo base_url('includes/js/js.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('includes/ajax/post.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('includes/js/js_actions.js')?>"></script>
 <?php require_once('includes/modal/modal.php'); ?>
