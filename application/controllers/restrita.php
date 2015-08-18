@@ -7,6 +7,7 @@
 			$this->load->helper('url');
 			$this->load->model('ambiente_model');
 			$this->load->model('usuario_model');
+			$this->load->model('event_model');
 		}
 		
 		public function index(){
@@ -265,6 +266,27 @@
 			$dados = array(
 				'allUsers' => $resultado_all_users,
 			);
+		}
+
+		public function newEvent(){		
+			$title = $_POST['title'];
+			$allDay = $_POST['allDay'];
+			$start = $_POST['start'];
+			$end = $_POST['end'];
+			
+			$dados = array(
+				'title' => $title,
+				'allDay' => $allDay,
+				'start' => $start,
+				'end' => $end
+			);
+	
+			$this->event_model->newEvent($dados);
+		}
+
+		public function getEvents(){
+			$all_events = $this->event_model->getEvents();
+			print_r(json_encode($all_events));
 		}
 	}
 

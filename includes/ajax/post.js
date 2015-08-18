@@ -414,3 +414,73 @@ $(document).ready(function() {
 		
 	});
 });
+
+$(document).ready(function() {
+	$.ajax({
+		url: 'restrita/getEvents',
+		type: 'POST',
+		data: {},
+	})
+	.done(function(data) {
+		
+	})
+	.fail(function() {
+		console.log("error");
+	})
+	.always(function() {
+		console.log("complete");
+	});
+	
+
+	function renderCalendar() {
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			lang: 'pt-br',
+			selectable: true,
+			selectHelper: true,
+			select: function(start, end) {
+				$('#modalNewEvent').modal("show");
+				$('#newEvent').click(function(event) {
+					var title = $('#title').val();
+					var inicio = start.toString();
+					var fim = end.toString();
+
+					$.ajax({
+						url: 'restrita/newEvent',
+						type: 'POST',
+						data: {title: title, allDay: true, start: inicio, end: fim},
+					})
+					.done(function(data) {
+					})
+					.fail(function() {
+					})
+					.always(function() {
+					});
+
+					$('#calendar').fullCalendar('unselect');
+				});
+			},
+			eventClick: function(calEvent, jsEvent, view) {
+		        // alert('Event: ' + calEvent.desc);
+		        // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+		        // alert('View: ' + view.name);
+		        // change the border color just for fun
+		        $(this).css('border-color', 'red');
+		    },
+			events: [
+			{
+				"id": "1",
+				"title": "Teste",
+				"allDay": "true",
+				"start": "Tue Aug 18 2015 00:00:00 GMT+0000",
+				"end": "Wed Aug 19 2015 00:00:00 GMT+0000"
+			}
+			]
+		});
+	}
+	renderCalendar();
+});
