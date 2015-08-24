@@ -17,6 +17,7 @@
 				'ambientes' => null,
 				'num_ambientes' => null,
 				'acesso' => null,
+				'calendar' => null,
 				'acessos_ambientes' => null,
 				'num_acessos' => null,
 				'apks' => null,
@@ -40,12 +41,13 @@
 			$result_acessos = $this->ambiente_model->getAcessos();
 			$result_apks = $this->ambiente_model->getApks();
 			$resultado_usu = $this->usuario_model->getUsuario($dados['sessao']['username']);
-			$rows = count($resultado);		
+			$rows = count($resultado);	
 			
 			$dados['tipos'] = $result_tipos;
 			$dados['ambientes'] = $resultado;
 			$dados['num_ambientes'] = $rows;
 			$dados['acesso'] = $resultado_usu->acesso;
+			$dados['calendar'] = $resultado_usu->calendar;
 			$dados['acessos_ambientes'] = $result_acessos;
 			$dados['num_acessos'] = count($result_acessos);
 			$dados['apks'] = $result_apks;
@@ -270,13 +272,13 @@
 
 		public function newEvent(){		
 			$title = $_POST['title'];
-			$allDay = $_POST['allDay'];
+			$desc = $_POST['desc'];
 			$start = $_POST['start'];
 			$end = $_POST['end'];
 			
 			$dados = array(
 				'title' => $title,
-				'allDay' => $allDay,
+				'desc' => $desc,
 				'start' => $start,
 				'end' => $end
 			);
@@ -287,6 +289,49 @@
 		public function getEvents(){
 			$all_events = $this->event_model->getEvents();
 			print_r(json_encode($all_events));
+		}
+
+		public function dragEvent(){		
+			$id = $_POST['id'];
+			$start = $_POST['start'];
+			$end = $_POST['end'];
+			
+			$dados = array(
+				'start' => $start,
+				'end' => $end
+			);
+	
+			$this->event_model->dragEvent($id, $dados);
+		}
+
+		public function updateEvent(){		
+			$id = $_POST['id'];
+			$title = $_POST['title'];
+			$desc = $_POST['desc'];
+			
+			$dados = array(
+				'title' => $title,
+				'desc' => $desc
+			);
+	
+			$this->event_model->updateEvent($id, $dados);
+		}
+
+		public function deleteEvent(){		
+			$id = $_POST['id'];
+			
+			$this->event_model->deleteEvent($id);
+		}
+
+		public function resizeEvent(){		
+			$id = $_POST['id'];
+			$end = $_POST['end'];
+
+			$dados = array(
+				'end' => $end,
+			);
+			
+			$this->event_model->resizeEvent($id, $dados);
 		}
 	}
 

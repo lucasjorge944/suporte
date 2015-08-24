@@ -20,7 +20,7 @@
 		
 		public function getUsuario($usuario=null){
 			if ($usuario != null){
-				$this->db->select('id_usuario, nome, usuario, email, acesso');
+				$this->db->select('id_usuario, nome, usuario, email, acesso, calendar');
 				$this->db->where('usuario', $usuario);
 				$this->db->limit(1);
 				return $this->db->get('tbl_usuario')->row();

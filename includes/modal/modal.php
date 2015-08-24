@@ -40,7 +40,6 @@
     </div>
   </div>
 </div>
-
 <!-- Modal Novo Acesso-->
 <div class="modal fade" id="modalNovoAcesso" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -535,7 +534,6 @@
 					    	<div class="checkbox">
 							  <label>
 							    <input type="checkbox" value="prod">
-							    
 							  </label>
 							</div>
 						</center>
@@ -550,8 +548,7 @@
     </div>
   </div>
 </div>
-
-<!-- Modal Novo Acesso-->
+<!-- Modal Novo Evento-->
 <div class="modal fade" id="modalNewEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -563,12 +560,54 @@
       	<form class="form-horizontal" style="padding:10px;">
       		<div class="form-group">
 				<input type="text" class="form-control" id="title" placeholder="Título">
-			 </div>
+			</div>
+			<div class="form-group">
+				<textarea type="text" class="form-control" id="desc" placeholder="Descrição"></textarea>
+			</div>
+			<div class="form-group">
+				<label>
+			      <input type="checkbox" id="allDay"> Dia inteiro
+			    </label>
+			</div>
 		</form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.reload();">Fechar</button>
         <button type="button" id="newEvent" class="btn btn-primary" onclick="location.reload();">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Editar ou Excluir-->
+<div class="modal fade" id="modalEditDel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    	<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Evento</h4>
+      	</div>
+      <div class="modal-body">
+      	<div class="row">
+      		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      			<div class="form-group">
+					<input type="text" class="form-control" id="editId" placeholder="" style="display:none;">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" id="editTitle" placeholder="Título">
+				</div>
+				<div class="form-group">
+					<textarea type="text" class="form-control" id="editDesc" placeholder="Descrição"></textarea>
+				</div>
+      		</div>
+      	</div>
+      	<div class="row">
+      		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<button id="btnSaveEdit" onclick="location.reload();" type="button" class="btn btn-success btn-block">Salvar</button>
+      		</div>
+      		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<button id="btnDelEvent" onclick="location.reload();" type="button" class="btn btn-danger btn-block">Excluir</button>
+      		</div>
+      	</div>
       </div>
     </div>
   </div>

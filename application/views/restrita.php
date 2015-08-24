@@ -23,6 +23,8 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('includes/webfontkit/stylesheet.css'); ?>">
 		<!-- Fullcalendar -->
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('includes/fullcalendar/fullcalendar.css'); ?>">
+		<!-- Noty -->
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('includes/noty/animate.css'); ?>">
 	</head>
 	<body>
 	<div class="top">
@@ -77,6 +79,9 @@
 			  ?>
 			</div>			
 		</div>
+	</div>
+	<div>
+		
 	</div>
 	<div class="container meio">
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -190,7 +195,14 @@
 			?>
 		</div>
 		<hr>
-			<div id='calendar'></div>
+			<?php
+				if ($calendar == 1){
+					echo "<div id='calendar'></div>";
+				}
+				else{
+
+				}
+			?>
 		<hr>
 	</div>
 	<div class="container rodape">
@@ -208,4 +220,5 @@
 <script type="text/javascript" src="<?php echo base_url('includes/fullcalendar/moment.min.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('includes/fullcalendar/fullcalendar.min.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('includes/fullcalendar/lang-all.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('includes/noty/jquery.noty.packaged.js'); ?>"></script>
 <?php require_once('includes/modal/modal.php'); ?>
