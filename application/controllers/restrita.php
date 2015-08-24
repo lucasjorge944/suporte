@@ -7,6 +7,7 @@
 			$this->load->helper('url');
 			$this->load->model('ambiente_model');
 			$this->load->model('usuario_model');
+			$this->load->model('event_model');
 		}
 		
 		public function index(){
@@ -16,6 +17,7 @@
 				'ambientes' => null,
 				'num_ambientes' => null,
 				'acesso' => null,
+				'calendar' => null,
 				'acessos_ambientes' => null,
 				'num_acessos' => null,
 				'apks' => null,
@@ -39,12 +41,13 @@
 			$result_acessos = $this->ambiente_model->getAcessos();
 			$result_apks = $this->ambiente_model->getApks();
 			$resultado_usu = $this->usuario_model->getUsuario($dados['sessao']['username']);
-			$rows = count($resultado);		
+			$rows = count($resultado);	
 			
 			$dados['tipos'] = $result_tipos;
 			$dados['ambientes'] = $resultado;
 			$dados['num_ambientes'] = $rows;
 			$dados['acesso'] = $resultado_usu->acesso;
+			$dados['calendar'] = $resultado_usu->calendar;
 			$dados['acessos_ambientes'] = $result_acessos;
 			$dados['num_acessos'] = count($result_acessos);
 			$dados['apks'] = $result_apks;
@@ -265,6 +268,70 @@
 			$dados = array(
 				'allUsers' => $resultado_all_users,
 			);
+		}
+
+		public function newEvent(){		
+			$title = $_POST['title'];
+			$desc = $_POST['desc'];
+			$start = $_POST['start'];
+			$end = $_POST['end'];
+			
+			$dados = array(
+				'title' => $title,
+				'desc' => $desc,
+				'start' => $start,
+				'end' => $end
+			);
+	
+			$this->event_model->newEvent($dados);
+		}
+
+		public function getEvents(){
+			$all_events = $this->event_model->getEvents();
+			print_r(json_encode($all_events));
+		}
+
+		public function dragEvent(){		
+			$id = $_POST['id'];
+			$start = $_POST['start'];
+			$end = $_POST['end'];
+			
+			$dados = array(
+				'start' => $start,
+				'end' => $end
+			);
+	
+			$this->event_model->dragEvent($id, $dados);
+		}
+
+		public function updateEvent(){		
+			$id = $_POST['id'];
+			$title = $_POST['title'];
+			$desc = $_POST['desc'];
+			
+			$dados = array(
+				'title' => $title,
+				'desc' => $desc
+			);
+	
+			$this->event_model->updateEvent($id, $dados);
+		}
+
+		public function deleteEvent(){		
+			$id = $_POST['id'];
+			
+			$this->event_model->deleteEvent($id);
+		}
+
+		public function resizeEvent(){		
+			$id = $_POST['id'];
+			$end = $_POST['end'];
+
+			$dados = array(
+				'end' => $end,
+			);
+			
+			$this->event_model->resizeEvent($id, $dados);
 		}
 	}
 

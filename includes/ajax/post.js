@@ -414,3 +414,200 @@ $(document).ready(function() {
 		
 	});
 });
+
+$(document).ready(function() {
+	$('#calendar').fullCalendar({
+		header: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'month,agendaWeek,agendaDay'
+		},
+		lang: 'pt-br',
+		eventColor: '#29A9D8',
+		editable: true,
+		eventDrop: function(event, delta, revertFunc) {
+
+	        var id = event.id;
+	        var start = event.start.format();
+	        var end = event.end.format();
+
+
+	        	$.ajax({
+					url: 'restrita/dragEvent',
+					type: 'POST',
+					data: {id: id, start: start, end: end},
+				})
+				.done(function(data) {
+				})
+				.fail(function() {
+				})
+				.always(function() {
+				});
+
+	    },	
+		selectable: true,
+		selectHelper: true,
+		select: function(start, end) {
+			$('#modalNewEvent').modal("show");
+			$('#newEvent').click(function(event) {
+				var title = $('#title').val();
+				var desc = $('#desc').val();
+
+				if ($("#allDay").is(":checked") == true){
+					var inicio = moment(start);
+					inicio = inicio.format('YYYY-MM-DD');
+
+					var fim = moment(end);
+					fim = fim.format('YYYY-MM-DD');
+				}
+				else{
+					var inicio = moment(start);
+					inicio = inicio.format();
+
+					var fim = moment(end);
+					fim = fim.format();
+				}
+
+				$.ajax({
+					url: 'restrita/newEvent',
+					type: 'POST',
+					data: {title: title, desc: desc, start: inicio, end: fim},
+				})
+				.done(function(data) {
+				})
+				.fail(function() {
+				})
+				.always(function() {
+				});
+
+				$('#calendar').fullCalendar('unselect');
+			});
+		},
+		eventClick: function(calEvent, jsEvent, view) {
+		        // alert('Event: ' + calEvent.id);
+		        // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+		        // alert('View: ' + view.name);
+
+		        $('#modalEditDel').modal('show');
+
+		        $('#editId').val(calEvent.id);
+		        $('#editTitle').val(calEvent.title);
+		        $('#editDesc').val(calEvent.desc);
+
+		        $('#btnSaveEdit').click(function(){
+
+		        	var id = $('#editId').val();
+		        	var title = $('#editTitle').val();
+		        	var desc = $('#editDesc').val();
+
+		        	$.ajax({
+					url: 'restrita/updateEvent',
+					type: 'POST',
+					data: {id:id, title: title, desc: desc},
+					})
+					.done(function(data) {
+					})
+					.fail(function() {
+					})
+					.always(function() {
+					});
+			    });
+
+			    $('#btnDelEvent').click(function(){
+
+		        	var id = $('#editId').val();
+
+		        	$.ajax({
+					url: 'restrita/deleteEvent',
+					type: 'POST',
+					data: {id:id},
+					})
+					.done(function(data) {
+					})
+					.fail(function() {
+					})
+					.always(function() {
+					});
+			    });
+
+		        
+		    },
+		    eventResize: function(event, delta, revertFunc) {
+
+		    	var id = event.id;
+		    	var end = event.end.format();
+
+		        	$.ajax({
+					url: 'restrita/resizeEvent',
+					type: 'POST',
+					data: {id:id, end:end},
+					})
+					.done(function(data) {
+					})
+					.fail(function() {
+					})
+					.always(function() {
+					});
+
+		    },
+		    eventSources: [
+		        // your event source
+		        {
+		        	url: 'restrita/getEvents',
+		        	type: 'POST',
+		        	data: {
+		        	},
+		        	error: function() {
+		        		alert('there was an error while fetching events!');
+		        	},
+		        }
+		        ]
+		    });
+
+
+	$(document).ready(function(){
+		$.ajax({
+			url: 'restrita/getEvents',
+			type: 'POST',
+			data: {},
+			})
+			.done(function(data) {
+				var eventos = $.parseJSON(data);
+				for (var i = 0; i < eventos.length; i++) {
+					var n = noty({
+					    text: '<strong>'+eventos[i].title+' hoje!</strong> </br> '+eventos[i].desc+'</br>'+eventos[i].start+' ás '+eventos[i].end,
+					    theme: 'relax',
+					    layout: 'topRight',
+					    type: 'warning',
+					    dismissQueue: true,
+					    template: '<div class="noty_message"><span class="noty_text"></span><div class="noty_close"></div></div>',
+					    animation: {
+					        open: 'animated bounceInRight', // Animate.css class names
+					        close: 'animated bounceOutRight', // Animate.css class names
+					        easing: 'swing', // unavailable - no need
+					        speed: 500 // unavailable - no need
+					    },
+					    timeout: false, // delay for closing event. Set false for sticky notifications
+					    force: false, // adds notification to the beginning of queue when set to true
+					    modal: false,
+					    maxVisible: 5, // you can set max visible notification for dismissQueue true option,
+					    killer: false, // for close all notifications before show
+					    closeWith: ['click'], // ['click', 'button', 'hover', 'backdrop'] // backdrop click will close all notifications
+					    callback: {
+					        onShow: function() {},
+					        afterShow: function() {},
+					        onClose: function() {},
+					        afterClose: function() {},
+					        onCloseClick: function() {},
+					    },
+					    buttons: false // an array of buttons
+					});	
+				};
+			})
+			.fail(function() {
+			})
+			.always(function() {
+			});
+	});
+
+});

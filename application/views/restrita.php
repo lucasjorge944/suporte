@@ -21,11 +21,10 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('includes/css/estilos.css') ?>">
 		<!-- Font -->
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('includes/webfontkit/stylesheet.css'); ?>">
-		<!-- jQuery -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script type="text/javascript" src="<?php echo base_url('includes/js/jquery-2.1.3.js'); ?>"></script>
-		<!-- Bootstrap -->
-		<script src="<?php echo base_url('includes/bootstrap/js/bootstrap.min.js'); ?>"></script>
+		<!-- Fullcalendar -->
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('includes/fullcalendar/fullcalendar.css'); ?>">
+		<!-- Noty -->
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('includes/noty/animate.css'); ?>">
 	</head>
 	<body>
 	<div class="top">
@@ -80,6 +79,9 @@
 			  ?>
 			</div>			
 		</div>
+	</div>
+	<div>
+		
 	</div>
 	<div class="container meio">
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -193,12 +195,30 @@
 			?>
 		</div>
 		<hr>
+			<?php
+				if ($calendar == 1){
+					echo "<div id='calendar'></div>";
+				}
+				else{
+
+				}
+			?>
+		<hr>
 	</div>
 	<div class="container rodape">
 		<p>© 2015 por ti.mob. Criado por LJAS.</p>
 	</div>
 </body>
 </html>
+<!-- jQuery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="<?php echo base_url('includes/bootstrap/js/bootstrap.min.js'); ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('includes/ajax/post.js')?>"></script>
 <script type="text/javascript" src="<?php echo base_url('includes/js/js_actions.js')?>"></script>
+<!-- Fullcalendar -->
+<script type="text/javascript" src="<?php echo base_url('includes/fullcalendar/moment.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('includes/fullcalendar/fullcalendar.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('includes/fullcalendar/lang-all.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('includes/noty/jquery.noty.packaged.js'); ?>"></script>
 <?php require_once('includes/modal/modal.php'); ?>
